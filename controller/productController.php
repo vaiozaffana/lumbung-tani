@@ -58,7 +58,7 @@ if (!empty($_FILES['image']['name'])) {
         exit;
     }
 
-    $image = "public/uploads/" . $uniqueName;
+    $image = "../public/uploads/" . $uniqueName;
 }
 
     $stmt = $conn->prepare("INSERT INTO products (code, name, unit, price, image) VALUES (?, ?, ?, ?, ?)");
