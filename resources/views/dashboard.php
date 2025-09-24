@@ -1,3 +1,5 @@
+ <?php require_once __DIR__ . '/../../config/db.php' ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -54,35 +56,32 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th>Gambar</th>
                                 <th>Kode</th>
-                                <th>Nama Produk</th>
-                                <th>Stok Tersisa</th>
-                                <th>Unit</th>
-                                <th>Status</th>
+                                <th>Nama</th>
+                                <th>Satuan</th>
+                                <th>Harga</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>PRD-001</td>
-                                <td>Beras Premium</td>
-                                <td>5</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-warning">Rendah</span></td>
-                            </tr>
-                            <tr>
-                                <td>PRD-007</td>
-                                <td>Beras Merah</td>
-                                <td>3</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-danger">Sangat Rendah</span></td>
-                            </tr>
-                            <tr>
-                                <td>PRD-012</td>
-                                <td>Beras Hitam</td>
-                                <td>7</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-warning">Rendah</span></td>
-                            </tr>
+                             <?php
+                        $result = $conn->query("SELECT * FROM products ORDER BY id DESC");
+                        while ($row = $result->fetch_assoc()):
+                        ?>
+                         <tr>
+                             <td>
+                                 <?php if ($row['image']): ?>
+                                     <img src="<?= $row['image'] ?>" width="50" height="50">
+                                 <?php else: ?>
+                                     <img src="https://via.placeholder.com/50x50?text=No+Img">
+                                 <?php endif; ?>
+                             </td>
+                             <td><?= $row['code'] ?></td>
+                             <td><?= $row['name'] ?></td>
+                             <td><?= $row['unit'] ?></td>
+                             <td>Rp <?= number_format($row['price'], 0, ',', '.') ?></td>
+                         </tr>
+                         <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>
@@ -90,12 +89,12 @@
         </div>
 
         <?php
-        require_once 'products-page.php'
+        require_once 'products-page.php';
         ?>
     </main>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/resources/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/resources/js/script.js"></script>
 </body>
 
 </html>

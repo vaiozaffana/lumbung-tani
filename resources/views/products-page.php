@@ -20,11 +20,11 @@
              <table class="table table-hover" id="productsTable">
                  <thead>
                      <tr>
+                         <th>Gambar</th>
                          <th data-sort="code">Kode</th>
                          <th data-sort="name">Nama Produk</th>
-                         <th data-sort="unit">Unit</th>
+                         <th data-sort="unit">Satuan</th>
                          <th data-sort="price">Harga</th>
-                         <th>Gambar</th>
                          <th>Aksi</th>
                      </tr>
                  </thead>
@@ -34,10 +34,6 @@
                         while ($row = $result->fetch_assoc()):
                         ?>
                          <tr>
-                             <td><?= $row['code'] ?></td>
-                             <td><?= $row['name'] ?></td>
-                             <td><?= $row['unit'] ?></td>
-                             <td>Rp <?= number_format($row['price'], 0, ",", ".") ?></td>
                              <td>
                                  <?php if ($row['image']): ?>
                                      <img src="<?= $row['image'] ?>" width="50" height="50">
@@ -45,6 +41,10 @@
                                      <img src="https://via.placeholder.com/50x50?text=No+Img">
                                  <?php endif; ?>
                              </td>
+                             <td><?= $row['code'] ?></td>
+                             <td><?= $row['name'] ?></td>
+                             <td><?= $row['unit'] ?></td>
+                             <td>Rp <?= number_format($row['price'], 0, ",", ".") ?></td>
                              <td>
                                  <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
                                      data-bs-target="#editProductModal<?= $row['id'] ?>">
@@ -139,40 +139,40 @@
  </div>
 
  <!-- Other pages would be implemented similarly -->
-<div class="page-content d-none" id="stock-page">
-    <div class="page-header">
-        <h1 class="page-title">Kelola Stok</h1>
-    </div>
-    <p>Halaman kelola stok dalam pengembangan...</p>
-</div>
+ <div class="page-content d-none" id="stock-page">
+     <div class="page-header">
+         <h1 class="page-title">Kelola Stok</h1>
+     </div>
+     <p>Halaman kelola stok dalam pengembangan...</p>
+ </div>
 
-<div class="page-content d-none" id="transactions-page">
-    <div class="page-header">
-        <h1 class="page-title">Transaksi</h1>
-    </div>
-    <p>Halaman transaksi dalam pengembangan...</p>
-</div>
+ <div class="page-content d-none" id="transactions-page">
+     <div class="page-header">
+         <h1 class="page-title">Transaksi</h1>
+     </div>
+     <p>Halaman transaksi dalam pengembangan...</p>
+ </div>
 
-<div class="page-content d-none" id="reports-page">
-    <div class="page-header">
-        <h1 class="page-title">Laporan</h1>
-    </div>
-    <p>Halaman laporan dalam pengembangan...</p>
-</div>
+ <div class="page-content d-none" id="reports-page">
+     <div class="page-header">
+         <h1 class="page-title">Laporan</h1>
+     </div>
+     <p>Halaman laporan dalam pengembangan...</p>
+ </div>
 
-<div class="page-content d-none" id="users-page">
-    <div class="page-header">
-        <h1 class="page-title">Pengguna</h1>
-    </div>
-    <p>Halaman pengguna dalam pengembangan...</p>
-</div>
+ <div class="page-content d-none" id="users-page">
+     <div class="page-header">
+         <h1 class="page-title">Pengguna</h1>
+     </div>
+     <p>Halaman pengguna dalam pengembangan...</p>
+ </div>
 
-<div class="page-content d-none" id="settings-page">
-    <div class="page-header">
-        <h1 class="page-title">Pengaturan</h1>
-    </div>
-    <p>Halaman pengaturan dalam pengembangan...</p>
-</div>
+ <div class="page-content d-none" id="settings-page">
+     <div class="page-header">
+         <h1 class="page-title">Pengaturan</h1>
+     </div>
+     <p>Halaman pengaturan dalam pengembangan...</p>
+ </div>
 
  <!-- Add Product Modal -->
  <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
