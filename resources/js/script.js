@@ -129,8 +129,68 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       reader.readAsDataURL(file);
+    } else {
+      previewImage.src = "";
+      previewImage.style.display = "none";
+      imagePreview.querySelector(".upload-placeholder").style.display = "block";
     }
   });
+
+  document.querySelectorAll(".upload-trigger").forEach((button) => {
+    button.addEventListener("click", function () {
+      const targetId = this.dataset.target;
+      if (!targetId) return;
+      const fileInput = document.getElementById(targetId);
+      if (fileInput) {
+        fileInput.click();
+      }
+    });
+  });
+
+  document
+    .querySelectorAll('input[type="file"][data-preview-target]')
+    .forEach((input) => {
+      input.addEventListener("change", function () {
+        const previewWrapper = document.getElementById(
+          this.dataset.previewTarget
+        );
+        const imgElement = document.getElementById(this.dataset.imageTarget);
+        const placeholder = previewWrapper
+          ? previewWrapper.querySelector(".upload-placeholder")
+          : null;
+        const file = this.files[0];
+
+        if (!previewWrapper || !imgElement) {
+          return;
+        }
+
+        if (file) {
+          const reader = new FileReader();
+          reader.addEventListener("load", function () {
+            imgElement.src = reader.result;
+            imgElement.style.display = "block";
+            if (placeholder) {
+              placeholder.style.display = "none";
+            }
+          });
+          reader.readAsDataURL(file);
+        } else {
+          const originalSrc = imgElement.dataset.originalSrc || "";
+          imgElement.src = originalSrc;
+          if (originalSrc) {
+            imgElement.style.display = "block";
+            if (placeholder) {
+              placeholder.style.display = "none";
+            }
+          } else {
+            imgElement.style.display = "none";
+            if (placeholder) {
+              placeholder.style.display = "block";
+            }
+          }
+        }
+      });
+    });
 
   // Edit product functionality
   const editButtons = document.querySelectorAll(".edit-product");
