@@ -399,6 +399,25 @@ body {
   font-weight: 600;
 }
 
+.modal .image-upload-container {
+  position: relative;
+}
+
+.modal .image-upload-container .image-preview {
+  position: static;
+  pointer-events: none;
+}
+
+.modal .image-upload-container .upload-trigger {
+  position: relative;
+  z-index: 2;
+}
+
+.modal .image-upload-container ~ .mb-3 {
+  position: relative;
+  z-index: 2;
+}
+
 .btn-close {
   filter: invert(1);
 }

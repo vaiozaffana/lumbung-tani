@@ -1,5 +1,14 @@
  <?php require_once __DIR__ . '/../../config/db.php' ?>
 
+ <?php
+$totalProducts = 0;
+if ($res = $conn->query("SELECT COUNT(*) AS total FROM products")) {
+    $row = $res->fetch_assoc();
+    $totalProducts = (int) ($row['total'] ?? 0);
+    $res->free();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -12,7 +21,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="/resources/style/style.css">
+    <link rel="stylesheet" href="/resources//style/style.css">
 </head>
 
 <body>
@@ -33,18 +42,8 @@
             <div class="stats-grid">
                 <div class="stat-card fade-in">
                     <i class="bi bi-box-seam stat-icon"></i>
-                    <h3 class="stat-value">245</h3>
+                    <h3 class="stat-value"><?= number_format($totalProducts, 0, ',', '.') ?></h3>
                     <p class="stat-label">Total Produk</p>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
-                    <i class="bi bi-exclamation-triangle stat-icon"></i>
-                    <h3 class="stat-value">12</h3>
-                    <p class="stat-label">Stok Rendah</p>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
-                    <i class="bi bi-cash-coin stat-icon"></i>
-                    <h3 class="stat-value">48</h3>
-                    <p class="stat-label">Transaksi Hari Ini</p>
                 </div>
             </div>
 
